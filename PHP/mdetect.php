@@ -461,15 +461,23 @@ class uagent_info {
   //**************************
   // Detects if the current browser is on a Palm device
   //  running the new WebOS.
-  function DetectPalmWebOS(){
-    return ( stripos( $this->useragent , $this->deviceWebOS )>-1 );
+  function DetectPalmWebOS()
+  {
+    if (stripos($this->useragent, $this->deviceWebOS) > -1)
+      return true; 
+    else
+      return false; 
   }
 
   //**************************
   // Detects if the current browser is on an HP tablet running WebOS.
-  function DetectWebOSTablet(){
-    return ( stripos( $this->useragent , $this->deviceWebOShp )>-1
-             && stripos( $this->useragent , $this->deviceTablet )>-1 );
+  function DetectWebOSTablet()
+  {
+    if ((stripos($this->useragent, $this->deviceWebOShp) > -1)
+			&& (stripos($this->useragent, $this->deviceTablet) > -1))
+      return true; 
+    else
+      return false; 
   }
 
   //**************************
@@ -484,6 +492,8 @@ class uagent_info {
   // Check to see whether the device is any device
   //  in the 'smartphone' category.
   function DetectSmartphone(){
+    global $isIphone, $isAndroidPhone, $isTierIphone;
+
     return ( $this->isIphone
              || $this->isAndroidPhone
              || ( $this->isTierIphone && !$this->DetectIpod() )
@@ -659,10 +669,12 @@ class uagent_info {
 
   //**************************
   // Detects if the current browser is a Sony Mylo device.
-  function DetectSonyMylo(){
-    return ( !stripos( $this->useragent , $this->manuSony )>-1
-             && ( stripos( $this->useragent , $this->qtembedded )>-1
-                  || stripos( $this->useragent , $this->mylocom2 )>-1 ) );
+  function DetectSonyMylo()
+  {
+    if( !stripos( $this->useragent , $this->manuSony )>-1 )
+      return false;
+    return ( stripos( $this->useragent , $this->qtembedded )>-1
+             || stripos( $this->useragent , $this->mylocom2 )>-1 );
   }
   
   
